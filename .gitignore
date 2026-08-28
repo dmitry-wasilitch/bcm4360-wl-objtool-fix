@@ -1,0 +1,26 @@
+# Proprietary or machine-specific inputs
+*.ko
+*.ko.*
+*.o
+*.a
+*.bin
+*.fw
+*.zst
+wlc_hybrid.o_shipped
+
+# Kernel/DKMS build output
+Module.symvers
+modules.order
+*.mod
+*.mod.c
+*.cmd
+.tmp_versions/
+
+# Logs, captures and local state
+*.log
+*.ndjson
+*.pcap
+*.pcapng
+__pycache__/
+.pytest_cache/
+.venv/

@@ -1,0 +1,33 @@
+--- a/src/shared/linux_osl.c
++++ b/src/shared/linux_osl.c
+@@ -860,7 +860,8 @@
+ char*
+ osl_strncpy(char *d, const char *s, uint n)
+ {
+-	return (strncpy(d, s, n));
++	strscpy_pad(d, s, n);
++	return d;
+ }
+ 
+ char*
+--- a/src/wl/sys/wl_linux.c
++++ b/src/wl/sys/wl_linux.c
+@@ -1539,8 +1539,7 @@
+ #endif
+ 	bzero(info, sizeof(struct ethtool_drvinfo));
+ 	snprintf(info->driver, sizeof(info->driver), "wl%d", wl->pub->unit);
+-	strncpy(info->version, EPI_VERSION_STR, sizeof(info->version));
+-	info->version[(sizeof(info->version))-1] = '\0';
++	strscpy(info->version, EPI_VERSION_STR, sizeof(info->version));
+ }
+ 
+ static int
+@@ -3027,7 +3026,7 @@
+ 	}
+ 
+ 	ASSERT(strlen(wlif->name) > 0);
+-	strncpy(wlif->dev->name, wlif->name, strlen(wlif->name));
++	strscpy(wlif->dev->name, wlif->name, IFNAMSIZ);
+ 
+ 	wl->monitor_dev = dev;
+ 	if (wl->monitor_type == 1)
